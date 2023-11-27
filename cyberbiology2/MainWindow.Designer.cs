@@ -30,6 +30,7 @@ namespace cyberbiology2
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.dataStrip = new System.Windows.Forms.MenuStrip();
             this.time_dataStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.day_dataStrip = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,10 +38,8 @@ namespace cyberbiology2
             this.autosavedateStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.currentTime = new System.Windows.Forms.ToolStripMenuItem();
             this.elapsedStrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.world_pictureBox = new System.Windows.Forms.PictureBox();
             this.cellInfo = new System.Windows.Forms.GroupBox();
             this.textBoxCellInfo = new System.Windows.Forms.RichTextBox();
-            this.cellImage = new System.Windows.Forms.PictureBox();
             this.drawEnergyTypeButton = new System.Windows.Forms.Button();
             this.drawStoredEnergyButton = new System.Windows.Forms.Button();
             this.drawGenomeButton = new System.Windows.Forms.Button();
@@ -56,19 +55,21 @@ namespace cyberbiology2
             this.mineralsEnabledButton = new System.Windows.Forms.Button();
             this.hintTextBox = new System.Windows.Forms.RichTextBox();
             this.chartButton = new System.Windows.Forms.Button();
-            this.chartsPictureBox = new System.Windows.Forms.PictureBox();
             this.rightInfoPanel = new System.Windows.Forms.Panel();
             this.chartsPanel = new System.Windows.Forms.Panel();
             this.maxGenerationStrip = new System.Windows.Forms.Label();
             this.organicCountStrip = new System.Windows.Forms.Label();
             this.populationStrip = new System.Windows.Forms.Label();
+            this.chartsPictureBox = new System.Windows.Forms.PictureBox();
+            this.cellImage = new System.Windows.Forms.PictureBox();
+            this.world_pictureBox = new System.Windows.Forms.PictureBox();
             this.dataStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.world_pictureBox)).BeginInit();
             this.cellInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cellImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartsPictureBox)).BeginInit();
             this.rightInfoPanel.SuspendLayout();
             this.chartsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartsPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cellImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.world_pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // dataStrip
@@ -151,17 +152,6 @@ namespace cyberbiology2
             this.elapsedStrip.Size = new System.Drawing.Size(81, 26);
             this.elapsedStrip.Text = "23:59:59";
             // 
-            // world_pictureBox
-            // 
-            this.world_pictureBox.BackColor = System.Drawing.SystemColors.Control;
-            this.world_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.world_pictureBox.Location = new System.Drawing.Point(0, 0);
-            this.world_pictureBox.Name = "world_pictureBox";
-            this.world_pictureBox.Size = new System.Drawing.Size(1801, 1119);
-            this.world_pictureBox.TabIndex = 1;
-            this.world_pictureBox.TabStop = false;
-            this.world_pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.world_pictureBox_MouseDown);
-            // 
             // cellInfo
             // 
             this.cellInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -192,15 +182,6 @@ namespace cyberbiology2
             this.textBoxCellInfo.Size = new System.Drawing.Size(360, 300);
             this.textBoxCellInfo.TabIndex = 1;
             this.textBoxCellInfo.Text = "";
-            // 
-            // cellImage
-            // 
-            this.cellImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cellImage.Location = new System.Drawing.Point(80, 27);
-            this.cellImage.Name = "cellImage";
-            this.cellImage.Size = new System.Drawing.Size(194, 194);
-            this.cellImage.TabIndex = 0;
-            this.cellImage.TabStop = false;
             // 
             // drawEnergyTypeButton
             // 
@@ -438,17 +419,6 @@ namespace cyberbiology2
             this.chartButton.MouseLeave += new System.EventHandler(this.ButtonChangeColor_Green);
             this.chartButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ButtonChangeColor_Yellow);
             // 
-            // chartsPictureBox
-            // 
-            this.chartsPictureBox.BackColor = System.Drawing.Color.Black;
-            this.chartsPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.chartsPictureBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.chartsPictureBox.Location = new System.Drawing.Point(0, 45);
-            this.chartsPictureBox.Name = "chartsPictureBox";
-            this.chartsPictureBox.Size = new System.Drawing.Size(1801, 320);
-            this.chartsPictureBox.TabIndex = 16;
-            this.chartsPictureBox.TabStop = false;
-            // 
             // rightInfoPanel
             // 
             this.rightInfoPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -517,6 +487,37 @@ namespace cyberbiology2
             this.populationStrip.TabIndex = 17;
             this.populationStrip.Text = "Alive: 15999";
             // 
+            // chartsPictureBox
+            // 
+            this.chartsPictureBox.BackColor = System.Drawing.Color.Black;
+            this.chartsPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.chartsPictureBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.chartsPictureBox.Location = new System.Drawing.Point(0, 45);
+            this.chartsPictureBox.Name = "chartsPictureBox";
+            this.chartsPictureBox.Size = new System.Drawing.Size(1801, 320);
+            this.chartsPictureBox.TabIndex = 16;
+            this.chartsPictureBox.TabStop = false;
+            // 
+            // cellImage
+            // 
+            this.cellImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cellImage.Location = new System.Drawing.Point(80, 27);
+            this.cellImage.Name = "cellImage";
+            this.cellImage.Size = new System.Drawing.Size(194, 194);
+            this.cellImage.TabIndex = 0;
+            this.cellImage.TabStop = false;
+            // 
+            // world_pictureBox
+            // 
+            this.world_pictureBox.BackColor = System.Drawing.SystemColors.Control;
+            this.world_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.world_pictureBox.Location = new System.Drawing.Point(0, 0);
+            this.world_pictureBox.Name = "world_pictureBox";
+            this.world_pictureBox.Size = new System.Drawing.Size(1801, 1119);
+            this.world_pictureBox.TabIndex = 1;
+            this.world_pictureBox.TabStop = false;
+            this.world_pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.world_pictureBox_MouseDown);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -528,6 +529,7 @@ namespace cyberbiology2
             this.Controls.Add(this.cellInfo);
             this.Controls.Add(this.world_pictureBox);
             this.Controls.Add(this.dataStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.dataStrip;
             this.Name = "MainWindow";
@@ -537,12 +539,12 @@ namespace cyberbiology2
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyUp);
             this.dataStrip.ResumeLayout(false);
             this.dataStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.world_pictureBox)).EndInit();
             this.cellInfo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cellImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartsPictureBox)).EndInit();
             this.rightInfoPanel.ResumeLayout(false);
             this.chartsPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartsPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cellImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.world_pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
