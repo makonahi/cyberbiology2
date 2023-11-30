@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Threading;
 
 namespace cyberbiology2
 {
@@ -459,21 +460,36 @@ namespace cyberbiology2
         //public slots
         public void CreateFirst()
         {
-                int x = 80, y = 5;
+                int x = rnd.Next(20,80), y = 5;
                 int[] tgenome = new int[genLenght];
                 int[] tcolor = new int[3];
-                Cell tcell = new Cell(true, 999, 0, tgenome, tcolor, 1, 25, x, y, rnd.Next(0, 8), 1);
                 for (int j = 0; j < genLenght; j++)
                     tgenome[j] = 25;
+                Cell tcell = new Cell(true, 999, 0, tgenome, tcolor, 1, 25, x, y, rnd.Next(0, 8), 1);
                 tcell.SetCellColor(64, 255, 64);
                 MainWindow.cells[x, y] = tcell;
             
+        }
+        public void CreateMutants()
+        {
+            for (int tx = 0; tx < width; tx++)
+                for (int ty = 0; ty < height; ty++)
+                {
+                    int[] tgenome = new int[genLenght];
+                    int[] tcolor = new int[3];
+                    for (int j = 0; j < genLenght; j++)
+                        tgenome[j] = rnd.Next(0,genLenght);
+                    Cell tcell = new Cell(true, 999, 0, tgenome, tcolor, 1, 999, tx, ty, rnd.Next(0, 8), 1);
+                    tcell.SetCellColor(rnd.Next(64,255), rnd.Next(64, 255), rnd.Next(64, 255));
+                    MainWindow.cells[tx, ty] = tcell;
+                }
         }
         public void CellsProgress()
         {
             int tpopulation = 0;
             int torganicCounter = 0;
             for (int tx = 0; tx < width; tx++)
+            {
                 for (int ty = 0; ty < height; ty++)
                 {
                     if (MainWindow.cells[tx, ty] != null && MainWindow.cells[tx, ty].active)
@@ -491,7 +507,8 @@ namespace cyberbiology2
                         {
                             torganicCounter++;
                             MainWindow.cells[tx, ty].active = false;
-                            if (MainWindow.time%4==0)MainWindow.cells[tx, ty].DrownOrganic();
+                            /*if (MainWindow.time%4==0)*/
+                            MainWindow.cells[tx, ty].DrownOrganic();
                             continue;
                         }
                         if (MainWindow.cells[tx, ty].organic == 3)
@@ -501,6 +518,8 @@ namespace cyberbiology2
                         }
                     }
                 }
+
+            }
             for (int tx = 0;tx < width; tx++)
                 for (int ty = 0; ty < height; ty++)
                 {

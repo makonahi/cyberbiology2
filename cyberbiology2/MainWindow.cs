@@ -22,7 +22,7 @@ namespace cyberbiology2
         static public int tilesize = 5;
         static public int width = 90*2;
         static public int height = 56*2;
-        static public int windowWidth = width * tilesize + 137;
+        static public int windowWidth = width * tilesize + 137 + 50;
         static public int windowHeight = height * tilesize + 68;
         static public int size = width * height;
         //objects
@@ -59,6 +59,7 @@ namespace cyberbiology2
         public static Random rnd = new Random();
         //other parameters
         public static int drawtype = 1;
+        public static int simulationSpeed = 3;
         public static bool simulationIsAlive = true;
         public static bool turnIsOver = false;//flag sends to other threads that turn is over and save/load could be performed
         public static bool autosaveCompleted = false;//checked every 1 day of season and autosaved then
@@ -98,10 +99,11 @@ namespace cyberbiology2
             starttime = DateTime.Now;
             mineralsEnabledButton_Click(null, null);
             hintTextBox.ReadOnly = true;
-            hintTextBox.Text=("Backspace - Close\nSpace - Pause\n" +
-                "Esc/RMouseButton - Show/Hide InfoBox\n" +
-                "Hold Q To Quit\nPress H to Hide\n" +
-                "1/2/3 to Change Draw Types");
+            hintTextBox.Text=("=Backspace - Close\n=Space - Pause&Continue\n" +
+                "=Esc/RMouse - Show/Hide InfoBox\n" +
+                "=Q To Quit\n=Press H to Hide window\n" +
+                "=1/2/3 to Change Draw Types\n"+
+                "=These binds could be used alternatively to buttons.");
         }
         private void Turn()
         {
@@ -114,38 +116,29 @@ namespace cyberbiology2
                     Operator.CellsProgress();
                     Autosave();
                 }
+                else
+                {
+                    Thread.Sleep(50);
+                }
                 turnIsOver = true;
-                //Thread.Sleep(3);
+                if (simulationSpeed == 1)
+                    Thread.Sleep(35);
+                if (simulationSpeed == 2)
+                    Thread.Sleep(20);
             }
         }
         private void TimeProgress()
         {
             time++;
-            time_dataStrip.Text = (time / 100).ToString() + ":00";
-            if (time >= 2400)
-            {
-                redrawNeededForCharts = true;
-                time = 0;
-                dayCounter++;
-                time_dataStrip.Text = (time % 100).ToString() + ":00";
-                day_dataStrip.Text = "Day " + dayCounter.ToString() + " of";
-                if (dayCounter >= 10)
-                {
-                    redrawNeeded = true;
-                    autosaveCompleted = false;
-                    if (season == 3)
-                        yearCounter++;
-                    dayCounter = 0;
-                    season = (season + 1) % 4;
-                    day_dataStrip.Text = "Day " + dayCounter.ToString() + " of";
-                    season_dataStrip.Text = seasonsDict[season].name + ", Year " + yearCounter.ToString();
-                }
-            }
         }
         private void ImageUpdate()
         {
             while (true)
             {
+                if (!simulationIsAlive)
+                {
+                    Thread.Sleep(50);
+                }
                 for (int x = 0; x < width; x++)
                     for (int y = 0; y < height; y++)
                     {
@@ -171,7 +164,7 @@ namespace cyberbiology2
                     redrawNeededForCharts = false;
                 }
                 drawer.Refresh();
-                //Thread.Sleep(10);
+                // Thread.Sleep(15);
             }
         }
         private void UpdateUI()
@@ -179,6 +172,31 @@ namespace cyberbiology2
             while (true)
             {
                 Operator.GetStats();
+                time_dataStrip.Text = (time / 100).ToString() + ":00";
+                Thread.Sleep(10);
+                if (time >= 2400)
+                {
+                    redrawNeededForCharts = true;
+                    time = 0;
+                    dayCounter++;
+                    time_dataStrip.Text = (time % 100).ToString() + ":00";
+                    Thread.Sleep(10);
+                    day_dataStrip.Text = "Day " + dayCounter.ToString() + " of";
+                    Thread.Sleep(10);
+                    if (dayCounter >= 10)
+                    {
+                        redrawNeeded = true;
+                        autosaveCompleted = false;
+                        if (season == 3)
+                            yearCounter++;
+                        dayCounter = 0;
+                        season = (season + 1) % 4;
+                        day_dataStrip.Text = "Day " + dayCounter.ToString() + " of";
+                        Thread.Sleep(10);
+                        season_dataStrip.Text = seasonsDict[season].name + ", Year " + yearCounter.ToString();
+                        Thread.Sleep(10);
+                    }
+                }
                 if (chartsPanel.Visible)
                 {
                     Invoke(new Action(() => populationStrip.Text = "Alive: " + population.ToString()));
@@ -202,7 +220,7 @@ namespace cyberbiology2
                 timeSpan = DateTime.Now - starttime;
                 elapsedTime = new DateTime(timeSpan.Ticks);
                 elapsedStrip.Text = elapsedTime.ToLongTimeString();
-                Thread.Sleep(460);
+                Thread.Sleep(10);
             }
         }
         private void Save(string path)
@@ -293,7 +311,7 @@ namespace cyberbiology2
             if (e.KeyValue == 32)
             {
                 simulationIsAlive = !simulationIsAlive;
-                if (simulationIsAlive)
+                if (!simulationIsAlive)
                     ButtonChangeColor_Yellow(pauseButton, null);
                 else
                     ButtonChangeColor_Green(pauseButton, null);
@@ -304,9 +322,7 @@ namespace cyberbiology2
             }
             if (e.KeyValue == 81)
             {
-                quitButton.ForeColor = Color.Red;
-                quitButton.FlatAppearance.BorderColor = Color.Red;
-                quitTimer.Start();
+                this.Close();
             }
         }
         private void world_pictureBox_MouseDown(object sender, MouseEventArgs e)
@@ -425,7 +441,7 @@ namespace cyberbiology2
         }
         async private void loadButton_MouseClick(object sender, MouseEventArgs e)
         {
-            simulationIsAlive = false;
+            pauseButton_MouseClick(null,null);
             await Task.Run(() => { while (!turnIsOver) continue; });
             OpenFileDialog of = new OpenFileDialog();
             of.Filter = "Cyberbiology File|*.cybsf";
@@ -475,7 +491,7 @@ namespace cyberbiology2
                 }
                 return;
             }
-            simulationIsAlive = true;
+            pauseButton_MouseClick(null, null);
         }
         async private void restartButton_MouseClick(object sender, MouseEventArgs e)
         {
@@ -507,19 +523,6 @@ namespace cyberbiology2
         }
         private void MainWindow_KeyUp(object sender, KeyEventArgs e)
         {
-                quitButton.ForeColor = Color.Lime;
-                quitButton.FlatAppearance.BorderColor = Color.Lime;
-                quitTimer.Dispose();
-            quitRequired = 0;
-            waitLabel.Text = "";
-        }
-        private void quitTimer_Tick(object sender, EventArgs e)
-        {
-            quitRequired+=30;
-            if (quitRequired>=1860)
-                this.Close();
-            if (quitRequired % 330 == 0)
-                waitLabel.Text += "/ / /\n";
         }
         private void mineralsEnabledButton_Click(object sender, EventArgs e)
         {
@@ -571,6 +574,43 @@ namespace cyberbiology2
         {
             chartsPanel.Visible = !chartsPanel.Visible;
         }
-
+        private void speedBar_ValueChanged(object sender, EventArgs e)
+        {
+            simulationSpeed = speedBar.Value;
+        }
+        private void mutatuionsButton_MouseLeave(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            button.ForeColor = Color.Coral;
+            button.FlatAppearance.BorderColor = Color.Coral;
+        }
+        async private void mutatuionsButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (simulationIsAlive)
+                pauseButton_MouseClick(null, null);
+            await Task.Run(() => { while (!turnIsOver) continue; });
+            cells = new Cell[width, height];
+            starttime = DateTime.Now;
+            autosavedateStrip.Text = "Last autosave: Never";
+            Operator.CreateMutants();
+            season = 0;
+            time = 0;
+            dayCounter = 0;
+            yearCounter = 0;
+            population = 0;
+            organicCounter = 0;
+            maxGeneration = 1;
+            redrawNeeded = true;
+            populationStrip.Text = "Alive: 1";
+            organicCountStrip.Text = "Organic: 0";
+            maxGenerationStrip.Text = "Last generation: 1";
+            time_dataStrip.Text = "00:00";
+            day_dataStrip.Text = "Day 0 of";
+            season_dataStrip.Text = "Spring, Year 0";
+            season_dataStrip.ForeColor = seasonsDict[0].color;
+            drawer.RefreshCharts();
+            drawer.SetTime();
+            drawer.DrawChartsAxis();
+        }
     }
 }

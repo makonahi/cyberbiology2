@@ -29,10 +29,8 @@ namespace cyberbiology2
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.dataStrip = new System.Windows.Forms.MenuStrip();
-            this.time_dataStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.day_dataStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.season_dataStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.autosavedateStrip = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,6 +38,7 @@ namespace cyberbiology2
             this.elapsedStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.cellInfo = new System.Windows.Forms.GroupBox();
             this.textBoxCellInfo = new System.Windows.Forms.RichTextBox();
+            this.cellImage = new System.Windows.Forms.PictureBox();
             this.drawEnergyTypeButton = new System.Windows.Forms.Button();
             this.drawStoredEnergyButton = new System.Windows.Forms.Button();
             this.drawGenomeButton = new System.Windows.Forms.Button();
@@ -49,8 +48,6 @@ namespace cyberbiology2
             this.RestartButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.quitTimer = new System.Windows.Forms.Timer(this.components);
-            this.waitLabel = new System.Windows.Forms.Label();
             this.hintButton = new System.Windows.Forms.Button();
             this.mineralsEnabledButton = new System.Windows.Forms.Button();
             this.hintTextBox = new System.Windows.Forms.RichTextBox();
@@ -61,15 +58,18 @@ namespace cyberbiology2
             this.organicCountStrip = new System.Windows.Forms.Label();
             this.populationStrip = new System.Windows.Forms.Label();
             this.chartsPictureBox = new System.Windows.Forms.PictureBox();
-            this.cellImage = new System.Windows.Forms.PictureBox();
             this.world_pictureBox = new System.Windows.Forms.PictureBox();
+            this.speedBar = new System.Windows.Forms.TrackBar();
+            this.time_dataStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.mutatuionsButton = new System.Windows.Forms.Button();
             this.dataStrip.SuspendLayout();
             this.cellInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cellImage)).BeginInit();
             this.rightInfoPanel.SuspendLayout();
             this.chartsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartsPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cellImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.world_pictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.speedBar)).BeginInit();
             this.SuspendLayout();
             // 
             // dataStrip
@@ -89,18 +89,9 @@ namespace cyberbiology2
             this.elapsedStrip});
             this.dataStrip.Location = new System.Drawing.Point(0, 1119);
             this.dataStrip.Name = "dataStrip";
-            this.dataStrip.Size = new System.Drawing.Size(1921, 30);
+            this.dataStrip.Size = new System.Drawing.Size(1971, 30);
             this.dataStrip.TabIndex = 0;
             this.dataStrip.Text = "menuStrip1";
-            // 
-            // time_dataStrip
-            // 
-            this.time_dataStrip.AutoSize = false;
-            this.time_dataStrip.ForeColor = System.Drawing.Color.White;
-            this.time_dataStrip.Name = "time_dataStrip";
-            this.time_dataStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.time_dataStrip.Size = new System.Drawing.Size(67, 26);
-            this.time_dataStrip.Text = "23:59";
             // 
             // day_dataStrip
             // 
@@ -163,7 +154,7 @@ namespace cyberbiology2
             this.cellInfo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cellInfo.Font = new System.Drawing.Font("Lucida Console", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cellInfo.ForeColor = System.Drawing.Color.Black;
-            this.cellInfo.Location = new System.Drawing.Point(1441, 0);
+            this.cellInfo.Location = new System.Drawing.Point(1491, 0);
             this.cellInfo.Name = "cellInfo";
             this.cellInfo.Size = new System.Drawing.Size(360, 1116);
             this.cellInfo.TabIndex = 2;
@@ -183,6 +174,15 @@ namespace cyberbiology2
             this.textBoxCellInfo.TabIndex = 1;
             this.textBoxCellInfo.Text = "";
             // 
+            // cellImage
+            // 
+            this.cellImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cellImage.Location = new System.Drawing.Point(80, 27);
+            this.cellImage.Name = "cellImage";
+            this.cellImage.Size = new System.Drawing.Size(194, 194);
+            this.cellImage.TabIndex = 0;
+            this.cellImage.TabStop = false;
+            // 
             // drawEnergyTypeButton
             // 
             this.drawEnergyTypeButton.BackColor = System.Drawing.Color.Yellow;
@@ -190,7 +190,7 @@ namespace cyberbiology2
             this.drawEnergyTypeButton.FlatAppearance.BorderSize = 3;
             this.drawEnergyTypeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Orange;
             this.drawEnergyTypeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.drawEnergyTypeButton.Location = new System.Drawing.Point(75, 14);
+            this.drawEnergyTypeButton.Location = new System.Drawing.Point(125, 15);
             this.drawEnergyTypeButton.Name = "drawEnergyTypeButton";
             this.drawEnergyTypeButton.Size = new System.Drawing.Size(34, 108);
             this.drawEnergyTypeButton.TabIndex = 7;
@@ -205,7 +205,7 @@ namespace cyberbiology2
             this.drawStoredEnergyButton.FlatAppearance.BorderSize = 3;
             this.drawStoredEnergyButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Orange;
             this.drawStoredEnergyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.drawStoredEnergyButton.Location = new System.Drawing.Point(75, 128);
+            this.drawStoredEnergyButton.Location = new System.Drawing.Point(125, 129);
             this.drawStoredEnergyButton.Name = "drawStoredEnergyButton";
             this.drawStoredEnergyButton.Size = new System.Drawing.Size(34, 108);
             this.drawStoredEnergyButton.TabIndex = 8;
@@ -220,7 +220,7 @@ namespace cyberbiology2
             this.drawGenomeButton.FlatAppearance.BorderSize = 3;
             this.drawGenomeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Orange;
             this.drawGenomeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.drawGenomeButton.Location = new System.Drawing.Point(75, 243);
+            this.drawGenomeButton.Location = new System.Drawing.Point(125, 244);
             this.drawGenomeButton.Name = "drawGenomeButton";
             this.drawGenomeButton.Size = new System.Drawing.Size(34, 108);
             this.drawGenomeButton.TabIndex = 6;
@@ -238,10 +238,10 @@ namespace cyberbiology2
             this.quitButton.ForeColor = System.Drawing.Color.Lime;
             this.quitButton.Location = new System.Drawing.Point(37, 14);
             this.quitButton.Name = "quitButton";
-            this.quitButton.Size = new System.Drawing.Size(32, 32);
+            this.quitButton.Size = new System.Drawing.Size(82, 32);
             this.quitButton.TabIndex = 1;
             this.quitButton.TabStop = false;
-            this.quitButton.Text = "Q";
+            this.quitButton.Text = "Quit";
             this.quitButton.UseVisualStyleBackColor = false;
             this.quitButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.quitButton_MouseClick);
             this.quitButton.MouseLeave += new System.EventHandler(this.ButtonChangeColor_Green);
@@ -254,12 +254,12 @@ namespace cyberbiology2
             this.pauseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pauseButton.Font = new System.Drawing.Font("Lucida Console", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.pauseButton.ForeColor = System.Drawing.Color.Lime;
-            this.pauseButton.Location = new System.Drawing.Point(37, 52);
+            this.pauseButton.Location = new System.Drawing.Point(37, 90);
             this.pauseButton.Name = "pauseButton";
-            this.pauseButton.Size = new System.Drawing.Size(32, 32);
+            this.pauseButton.Size = new System.Drawing.Size(82, 32);
             this.pauseButton.TabIndex = 2;
             this.pauseButton.TabStop = false;
-            this.pauseButton.Text = "P";
+            this.pauseButton.Text = "Pause";
             this.pauseButton.UseVisualStyleBackColor = false;
             this.pauseButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pauseButton_MouseClick);
             this.pauseButton.MouseLeave += new System.EventHandler(this.ButtonChangeColor_Green);
@@ -272,12 +272,12 @@ namespace cyberbiology2
             this.hideButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hideButton.Font = new System.Drawing.Font("Lucida Console", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.hideButton.ForeColor = System.Drawing.Color.Lime;
-            this.hideButton.Location = new System.Drawing.Point(37, 90);
+            this.hideButton.Location = new System.Drawing.Point(37, 52);
             this.hideButton.Name = "hideButton";
-            this.hideButton.Size = new System.Drawing.Size(32, 32);
+            this.hideButton.Size = new System.Drawing.Size(82, 32);
             this.hideButton.TabIndex = 3;
             this.hideButton.TabStop = false;
-            this.hideButton.Text = "H";
+            this.hideButton.Text = "Hide";
             this.hideButton.UseVisualStyleBackColor = false;
             this.hideButton.Click += new System.EventHandler(this.hideButton_Click);
             this.hideButton.MouseLeave += new System.EventHandler(this.ButtonChangeColor_Green);
@@ -288,14 +288,14 @@ namespace cyberbiology2
             this.RestartButton.BackColor = System.Drawing.Color.Black;
             this.RestartButton.FlatAppearance.BorderColor = System.Drawing.Color.Lime;
             this.RestartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RestartButton.Font = new System.Drawing.Font("Lucida Console", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.RestartButton.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.RestartButton.ForeColor = System.Drawing.Color.Lime;
             this.RestartButton.Location = new System.Drawing.Point(37, 242);
             this.RestartButton.Name = "RestartButton";
-            this.RestartButton.Size = new System.Drawing.Size(32, 32);
+            this.RestartButton.Size = new System.Drawing.Size(82, 32);
             this.RestartButton.TabIndex = 6;
             this.RestartButton.TabStop = false;
-            this.RestartButton.Text = "R";
+            this.RestartButton.Text = "Restart";
             this.RestartButton.UseVisualStyleBackColor = false;
             this.RestartButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.restartButton_MouseClick);
             this.RestartButton.MouseLeave += new System.EventHandler(this.ButtonChangeColor_Green);
@@ -310,10 +310,10 @@ namespace cyberbiology2
             this.loadButton.ForeColor = System.Drawing.Color.Lime;
             this.loadButton.Location = new System.Drawing.Point(37, 204);
             this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(32, 32);
+            this.loadButton.Size = new System.Drawing.Size(82, 32);
             this.loadButton.TabIndex = 5;
             this.loadButton.TabStop = false;
-            this.loadButton.Text = "L";
+            this.loadButton.Text = "Load";
             this.loadButton.UseVisualStyleBackColor = false;
             this.loadButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.loadButton_MouseClick);
             this.loadButton.MouseLeave += new System.EventHandler(this.ButtonChangeColor_Green);
@@ -328,30 +328,14 @@ namespace cyberbiology2
             this.saveButton.ForeColor = System.Drawing.Color.Lime;
             this.saveButton.Location = new System.Drawing.Point(37, 166);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(32, 32);
+            this.saveButton.Size = new System.Drawing.Size(82, 32);
             this.saveButton.TabIndex = 4;
             this.saveButton.TabStop = false;
-            this.saveButton.Text = "S";
+            this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
             this.saveButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.saveButton_MouseClick);
             this.saveButton.MouseLeave += new System.EventHandler(this.ButtonChangeColor_Green);
             this.saveButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ButtonChangeColor_Yellow);
-            // 
-            // quitTimer
-            // 
-            this.quitTimer.Interval = 30;
-            this.quitTimer.Tick += new System.EventHandler(this.quitTimer_Tick);
-            // 
-            // waitLabel
-            // 
-            this.waitLabel.BackColor = System.Drawing.Color.Black;
-            this.waitLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.waitLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.waitLabel.ForeColor = System.Drawing.Color.Lime;
-            this.waitLabel.Location = new System.Drawing.Point(75, 430);
-            this.waitLabel.Name = "waitLabel";
-            this.waitLabel.Size = new System.Drawing.Size(34, 108);
-            this.waitLabel.TabIndex = 9;
             // 
             // hintButton
             // 
@@ -360,7 +344,7 @@ namespace cyberbiology2
             this.hintButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hintButton.Font = new System.Drawing.Font("Lucida Console", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.hintButton.ForeColor = System.Drawing.Color.Lime;
-            this.hintButton.Location = new System.Drawing.Point(75, 395);
+            this.hintButton.Location = new System.Drawing.Point(87, 281);
             this.hintButton.Name = "hintButton";
             this.hintButton.Size = new System.Drawing.Size(32, 32);
             this.hintButton.TabIndex = 10;
@@ -378,7 +362,7 @@ namespace cyberbiology2
             this.mineralsEnabledButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.mineralsEnabledButton.Font = new System.Drawing.Font("Lucida Console", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mineralsEnabledButton.ForeColor = System.Drawing.Color.Cyan;
-            this.mineralsEnabledButton.Location = new System.Drawing.Point(75, 357);
+            this.mineralsEnabledButton.Location = new System.Drawing.Point(49, 281);
             this.mineralsEnabledButton.Name = "mineralsEnabledButton";
             this.mineralsEnabledButton.Size = new System.Drawing.Size(32, 32);
             this.mineralsEnabledButton.TabIndex = 12;
@@ -396,7 +380,8 @@ namespace cyberbiology2
             this.hintTextBox.ForeColor = System.Drawing.Color.Lime;
             this.hintTextBox.Location = new System.Drawing.Point(0, 0);
             this.hintTextBox.Name = "hintTextBox";
-            this.hintTextBox.Size = new System.Drawing.Size(419, 277);
+            this.hintTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.hintTextBox.Size = new System.Drawing.Size(1801, 277);
             this.hintTextBox.TabIndex = 14;
             this.hintTextBox.Text = "";
             this.hintTextBox.Visible = false;
@@ -406,14 +391,14 @@ namespace cyberbiology2
             this.chartButton.BackColor = System.Drawing.Color.Black;
             this.chartButton.FlatAppearance.BorderColor = System.Drawing.Color.Lime;
             this.chartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.chartButton.Font = new System.Drawing.Font("Lucida Console", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.chartButton.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.chartButton.ForeColor = System.Drawing.Color.Lime;
             this.chartButton.Location = new System.Drawing.Point(37, 128);
             this.chartButton.Name = "chartButton";
-            this.chartButton.Size = new System.Drawing.Size(32, 32);
+            this.chartButton.Size = new System.Drawing.Size(82, 32);
             this.chartButton.TabIndex = 15;
             this.chartButton.TabStop = false;
-            this.chartButton.Text = "G";
+            this.chartButton.Text = "Show Charts";
             this.chartButton.UseVisualStyleBackColor = false;
             this.chartButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chartButton_MouseClick);
             this.chartButton.MouseLeave += new System.EventHandler(this.ButtonChangeColor_Green);
@@ -423,6 +408,8 @@ namespace cyberbiology2
             // 
             this.rightInfoPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.rightInfoPanel.BackColor = System.Drawing.Color.Black;
+            this.rightInfoPanel.Controls.Add(this.mutatuionsButton);
+            this.rightInfoPanel.Controls.Add(this.speedBar);
             this.rightInfoPanel.Controls.Add(this.drawEnergyTypeButton);
             this.rightInfoPanel.Controls.Add(this.chartButton);
             this.rightInfoPanel.Controls.Add(this.drawStoredEnergyButton);
@@ -431,7 +418,6 @@ namespace cyberbiology2
             this.rightInfoPanel.Controls.Add(this.quitButton);
             this.rightInfoPanel.Controls.Add(this.hintButton);
             this.rightInfoPanel.Controls.Add(this.pauseButton);
-            this.rightInfoPanel.Controls.Add(this.waitLabel);
             this.rightInfoPanel.Controls.Add(this.hideButton);
             this.rightInfoPanel.Controls.Add(this.saveButton);
             this.rightInfoPanel.Controls.Add(this.RestartButton);
@@ -439,7 +425,7 @@ namespace cyberbiology2
             this.rightInfoPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.rightInfoPanel.Location = new System.Drawing.Point(1800, 0);
             this.rightInfoPanel.Name = "rightInfoPanel";
-            this.rightInfoPanel.Size = new System.Drawing.Size(121, 1119);
+            this.rightInfoPanel.Size = new System.Drawing.Size(171, 1119);
             this.rightInfoPanel.TabIndex = 17;
             // 
             // chartsPanel
@@ -498,15 +484,6 @@ namespace cyberbiology2
             this.chartsPictureBox.TabIndex = 16;
             this.chartsPictureBox.TabStop = false;
             // 
-            // cellImage
-            // 
-            this.cellImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cellImage.Location = new System.Drawing.Point(80, 27);
-            this.cellImage.Name = "cellImage";
-            this.cellImage.Size = new System.Drawing.Size(194, 194);
-            this.cellImage.TabIndex = 0;
-            this.cellImage.TabStop = false;
-            // 
             // world_pictureBox
             // 
             this.world_pictureBox.BackColor = System.Drawing.SystemColors.Control;
@@ -518,11 +495,52 @@ namespace cyberbiology2
             this.world_pictureBox.TabStop = false;
             this.world_pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.world_pictureBox_MouseDown);
             // 
+            // speedBar
+            // 
+            this.speedBar.LargeChange = 1;
+            this.speedBar.Location = new System.Drawing.Point(49, 319);
+            this.speedBar.Maximum = 3;
+            this.speedBar.Minimum = 1;
+            this.speedBar.Name = "speedBar";
+            this.speedBar.Size = new System.Drawing.Size(70, 45);
+            this.speedBar.TabIndex = 16;
+            this.speedBar.TabStop = false;
+            this.speedBar.Value = 3;
+            this.speedBar.ValueChanged += new System.EventHandler(this.speedBar_ValueChanged);
+            // 
+            // time_dataStrip
+            // 
+            this.time_dataStrip.AutoSize = false;
+            this.time_dataStrip.ForeColor = System.Drawing.Color.White;
+            this.time_dataStrip.Name = "time_dataStrip";
+            this.time_dataStrip.Padding = new System.Windows.Forms.Padding(0);
+            this.time_dataStrip.Size = new System.Drawing.Size(67, 26);
+            this.time_dataStrip.Text = "23:59";
+            // 
+            // mutatuionsButton
+            // 
+            this.mutatuionsButton.BackColor = System.Drawing.Color.Black;
+            this.mutatuionsButton.FlatAppearance.BorderColor = System.Drawing.Color.Coral;
+            this.mutatuionsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.mutatuionsButton.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.mutatuionsButton.ForeColor = System.Drawing.Color.Coral;
+            this.mutatuionsButton.Location = new System.Drawing.Point(57, 358);
+            this.mutatuionsButton.Name = "mutatuionsButton";
+            this.mutatuionsButton.Size = new System.Drawing.Size(102, 46);
+            this.mutatuionsButton.TabIndex = 17;
+            this.mutatuionsButton.TabStop = false;
+            this.mutatuionsButton.Text = "Mutations Mode";
+            this.mutatuionsButton.UseVisualStyleBackColor = false;
+            this.mutatuionsButton.Visible = false;
+            this.mutatuionsButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mutatuionsButton_MouseClick);
+            this.mutatuionsButton.MouseLeave += new System.EventHandler(this.mutatuionsButton_MouseLeave);
+            this.mutatuionsButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ButtonChangeColor_Yellow);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1921, 1149);
+            this.ClientSize = new System.Drawing.Size(1971, 1149);
             this.Controls.Add(this.chartsPanel);
             this.Controls.Add(this.rightInfoPanel);
             this.Controls.Add(this.hintTextBox);
@@ -540,11 +558,13 @@ namespace cyberbiology2
             this.dataStrip.ResumeLayout(false);
             this.dataStrip.PerformLayout();
             this.cellInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cellImage)).EndInit();
             this.rightInfoPanel.ResumeLayout(false);
+            this.rightInfoPanel.PerformLayout();
             this.chartsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chartsPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cellImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.world_pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.speedBar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -552,7 +572,6 @@ namespace cyberbiology2
         #endregion
 
         private System.Windows.Forms.MenuStrip dataStrip;
-        private System.Windows.Forms.ToolStripMenuItem time_dataStrip;
         private System.Windows.Forms.PictureBox world_pictureBox;
         private System.Windows.Forms.ToolStripMenuItem day_dataStrip;
         private System.Windows.Forms.ToolStripMenuItem season_dataStrip;
@@ -568,8 +587,6 @@ namespace cyberbiology2
         private System.Windows.Forms.Button RestartButton;
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Timer quitTimer;
-        private System.Windows.Forms.Label waitLabel;
         private System.Windows.Forms.Button hintButton;
         private System.Windows.Forms.Button mineralsEnabledButton;
         private System.Windows.Forms.RichTextBox hintTextBox;
@@ -583,6 +600,9 @@ namespace cyberbiology2
         private System.Windows.Forms.Label organicCountStrip;
         private System.Windows.Forms.Label maxGenerationStrip;
         private System.Windows.Forms.PictureBox chartsPictureBox;
+        private System.Windows.Forms.TrackBar speedBar;
+        private System.Windows.Forms.ToolStripMenuItem time_dataStrip;
+        private System.Windows.Forms.Button mutatuionsButton;
     }
 }
 

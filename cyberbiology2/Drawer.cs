@@ -108,9 +108,9 @@ namespace cyberbiology2
                     if (MainWindow.mineralsEnabled&&(int)Math.Ceiling((y - height / 2) / 8.0) > 0)
                     {
                         if (!plusExist)
-                            g.DrawString("+" + ((int)Math.Ceiling((y - height / 2) / 8.0)).ToString(), font, textBrush, 24, y * tilesize - 26);
+                            g.DrawString("+" + ((int)Math.Ceiling((y - height / 2) / 8.0)).ToString(), font, textBrush, 20, y * tilesize - 26);
                         else
-                            g.DrawString(" " + ((int)Math.Ceiling((y - height / 2) / 8.0)).ToString(), font, textBrush, 24, y * tilesize - 26);
+                            g.DrawString(" " + ((int)Math.Ceiling((y - height / 2) / 8.0)).ToString(), font, textBrush, 20, y * tilesize - 26);
                     }
                 }
             }
